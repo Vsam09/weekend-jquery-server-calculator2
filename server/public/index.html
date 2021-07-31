@@ -9,13 +9,15 @@
     <title>Calculator Part 2</title>
 </head>
 <body>
-    <input type="number" placeholder="Enter">
-    <button id="add"> + </button>
-    <button id="subtract"> - </button>
-    <button id="multiple"> * </button>
-    <button id="divide"> / </button>
-    <input type="number" placeholder="Enter2">
-    <button id="equals"> = </button>
-    <button id="clear">C</button>
+    <input id="firstInput" type="number" placeholder="">
+    <button class="operator" id="add" value="+"> + </button>
+    <button class="operator" id="subtract" value="-"> - </button>
+    <button class="operator" id="multiple" value="*"> * </button>
+    <button class="operator" id="divide" value="/"> / </button>
+    <input id="secondInput" type="number" placeholder="">
+    <button class="operator" id="equals" value="="> = </button>
+    <button class="operator" id="clear">C</button>
+
+    <ul id="results"></ul>
 </body>
 </html>
