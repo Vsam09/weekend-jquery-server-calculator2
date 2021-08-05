@@ -6,9 +6,9 @@ $(document).ready(onReady);
 
 function onReady() {
     console.log('jQuery')
-    $('#clear').on('click', clearInputs)
+    $('.clearBtn').on('click', clearInputs)
     $('.operator').on('click', operatorButtons)
-    $('#equals').on('click', equals)
+    $('.equalsBtn').on('click', equals)
     getCalculations();
 };
 
@@ -19,39 +19,46 @@ function clearInputs() {
     $('#firstInput').val(''),
     $('#secondInput').val('')  
 };
-//Operator button should work "on click for all buttons"
+//Operator button should work "on click for + - * / buttons"
 function operatorButtons() {
     console.log('operators is working');
     operator = $(this).text();
+    console.log('operator', operator)
 };
 
 //Render append to the DOM
 function renderResults(calculation) {
+    console.log('c', calculation)
     $('#results').empty();
+    $('#resultsOut').text(calculation[calculation.length-1].result);
 
-    for (let results of calculation);
-    $('#results').append(`
-        <li>
-            ${results.firstInput}
-            ${results.operator}
-            ${results.secondInput} = ${results.result}
-        </li>
-    `);
+    for (results of calculation) {
+        console.log('result', results)
+        $('#results').append(`
+            <li>
+                ${results.number1}
+                ${results.operator}
+                ${results.number2}
+                = ${results.result}
+            </li>
+        `);
+    }
+   
 };
-//Create a GET for calculation
+//Create a GET ajax to retrieve from the server side
 function getCalculations() {
     $.ajax({
         method: 'GET',
         url: '/calculation'
     })
     .then(function(response) {
-        console.log(response);
+        console.log('r', response);
         renderResults(response);
     })
 };
 //Create function for operator " = " button
-//It should also calculate the 2 inputs with
-//Selected operators add, subtract, divide, or multiple
+//It should calculate the 2 inputs with
+//selected operators add, subtract, divide, or multiple from the server side
 //!! Don't forget about $.ajax(method, url, 
 //.then and .catch(err)500 !!
 function equals() {
