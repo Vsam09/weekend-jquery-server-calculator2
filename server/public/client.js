@@ -9,7 +9,8 @@ function onReady() {
     $('#clear').on('click', clearInputs)
     $('.operator').on('click', operatorButtons)
     $('#equals').on('click', equals)
-}
+    getCalculations();
+};
 
 //Create C button and clear inputs
 //when C button is clicked
@@ -24,19 +25,30 @@ function operatorButtons() {
     operator = $(this).text();
 };
 
-//Append to the DOM
-function renderResults(result) {
+//Render append to the DOM
+function renderResults(calculation) {
     $('#results').empty();
 
-    for (let results of result);
+    for (let results of calculation);
     $('#results').append(`
         <li>
             ${results.firstInput}
             ${results.operator}
-            ${results.secondInput}
+            ${results.secondInput} = ${results.result}
         </li>
     `);
-}
+};
+//Create a GET for calculation
+function getCalculations() {
+    $.ajax({
+        method: 'GET',
+        url: '/calculation'
+    })
+    .then(function(response) {
+        console.log(response);
+        renderResults(response);
+    })
+};
 //Create function for operator " = " button
 //It should also calculate the 2 inputs with
 //Selected operators add, subtract, divide, or multiple
@@ -45,18 +57,19 @@ function renderResults(result) {
 function equals() {
     console.log('equals works')
     let input = { 
-        firstInput: Number ($('#firstInput').val()),
-        secondInput: Number ($('#secondInput').val()),
+        firstInput: $('#firstInput').val(),
+        secondInput: $('#secondInput').val(),
         operator: operator
     };
     console.log('inputs', input);
     $.ajax ({
         method: 'POST',
-        url: '/result',
+        url: '/calculation',
         data: input
     })
     .then( function(response) {
         console.log(response)
+        getCalculations();
     })
     .catch((err) => {
         console.log('Equals error', err)

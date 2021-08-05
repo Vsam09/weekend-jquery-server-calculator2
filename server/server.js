@@ -1,6 +1,6 @@
 const express = require('express');
 
-let result = [];
+let calculation = [];
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -13,20 +13,18 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/calculation', (req, res) => {
     // send back to the client all calculations
-    res.send(calculations);
+    res.send(calculation);
 })
-
-
 
 app.post('/calculation', (req, res) => {
     // wheres our data???
-    console.log(calculations);
+    console.log(calculation);
     console.log('here is our data:', req.body);
 
     const operator = req.body.operator;
     // take the operand input
-    const number1 = $('#firstInput');
-    const number2 = $('#secondInput');;
+    const number1 = Number(req.body.number1);
+    const number2 = Number(req.body.number2);
     
     let result = 0;
     
@@ -46,14 +44,14 @@ app.post('/calculation', (req, res) => {
 
     //SAVE IN ARRAY...?
     const completedCalc = {
-        num1 : num1,
-        num2 : num2,
+        number1 : number1,
+        number2 : number2,
         operator : operator,
         result: result
     }
 
-    calculations.push(completedCalc);
-    console.log(calculations);
+    calculation.push(completedCalc);
+    console.log(calculation);
 
     res.sendStatus(200);
 });
