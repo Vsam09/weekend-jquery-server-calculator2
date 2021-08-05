@@ -1,0 +1,14 @@
+[x] Create 2 input elements
+[x] Create buttons for operators ( +, -, *, /)
+[x] Create a "Clear" C button
+    [x] C button on click should remove inputs
+[x] Create " = " operators
+    [] " = " on click, captures the input data
+             and spits out the total values.
+[] Server side should handle the mathematical
+   operators Add, Subtract, Division, and Multiple
+[] Once calculated, should send back OK (res.sendStatus(200))
+[] Make a GET request (app.get)
+[] Make a POST request (app.post)
+[] Display a list of all previous calculation on the
+   page when it loads using a GET request(app.get)

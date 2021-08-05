@@ -1,57 +1,32 @@
 console.log('Client JS')
 
-let results = [{}];
+let operator = '';
 
 $(document).ready(onReady);
 
 function onReady() {
     console.log('jQuery')
     $('#clear').on('click', clearInputs)
-    $('#add').on('click', add)
+    $('.operator').on('click', operatorButtons)
+    $('#equals').on('click', equals)
 }
 
 function clearInputs() {
     console.log('Clear Inputs')
-    $('#firstInput').val(),
-    $('#secondInput').val()  
+    $('#firstInput').val(''),
+    $('#secondInput').val('')  
 };
-function add() {
-    let input = inputs();
-    results.push(input);
-    console.log('results', results)
+function operatorButtons() {
+    console.log('operator is working');
+    operator = $(this).text();
 }
-function inputs() {
-    console.log('firstInput')
+
+function equals() {
+    console.log('equals works')
     let input = { 
         firstInput: Number ($('#firstInput').val()),
-        secondInput: Number ($('#secondInput').val())
-        
+        secondInput: Number ($('#secondInput').val()),
+        operator: operator
     };
     return input;
 }
-
-// take the operator input
-const operator = operator;
-
-// take the operand input
-const number1 = $('#firstInput');
-const number2 = $('#secondInput');;
-
-let result;
-
-// using if...else if... else
-if (operator == '+') {
-    result = number1 + number2;
-}
-else if (operator == '-') {
-    result = number1 - number2;
-}
-else if (operator == '*') {
-    result = number1 * number2;
-}
-else {
-    result = number1 / number2;
-}
-
-// display the result
-console.log(`${number1} ${operator} ${number2} = ${result}`);
