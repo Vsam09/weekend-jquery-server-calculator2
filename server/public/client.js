@@ -1,5 +1,3 @@
-const { urlencoded } = require("body-parser");
-
 console.log('Client JS')
 
 let operator = '';
@@ -26,10 +24,24 @@ function operatorButtons() {
     operator = $(this).text();
 };
 
+//Append to the DOM
+function renderResults(result) {
+    $('#results').empty();
+
+    for (let results of result);
+    $('#results').append(`
+        <li>
+            ${results.firstInput}
+            ${results.operator}
+            ${results.secondInput}
+        </li>
+    `);
+}
 //Create function for operator " = " button
 //It should also calculate the 2 inputs with
 //Selected operators add, subtract, divide, or multiple
-//!! Don't forget about $.ajax(method, url) !!
+//!! Don't forget about $.ajax(method, url, 
+//.then and .catch(err)500 !!
 function equals() {
     console.log('equals works')
     let input = { 
@@ -45,5 +57,9 @@ function equals() {
     })
     .then( function(response) {
         console.log(response)
+    })
+    .catch((err) => {
+        console.log('Equals error', err)
+        res.sendStatus(500);
     })
 };
